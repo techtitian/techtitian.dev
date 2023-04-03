@@ -9,6 +9,7 @@ type Props = {
   fontColor: string;
   underlineColor: string;
   hoverColor: string;
+  display?: "block" | "inline" | "inline-block";
 };
 
 export default function Title({
@@ -19,6 +20,7 @@ export default function Title({
   hoverColor,
   fontSize = "18px",
   underline = false,
+  display = "inline-block",
 }: Props): ReactElement {
   return (
     <Text
@@ -28,6 +30,7 @@ export default function Title({
       underline={underline}
       underlineColor={underlineColor}
       hoverColor={hoverColor}
+      display={display}
     >
       {text}
     </Text>
@@ -40,12 +43,17 @@ const Text = styled.h1<{
   underline: boolean;
   underlineColor: string;
   hoverColor: string;
+  display: string;
 }>`
   font-size: ${(props) => props.fontSize};
-  display: inline-block;
+  display: ${(props) => props.display};
   color: ${(props) => props.fontColor};
   font-weight: bold;
   transition: ease-in-out 0.3s;
+  padding: 0;
+  margin: 0;
+
+  text-align: center;
 
   &::after {
     content: "";

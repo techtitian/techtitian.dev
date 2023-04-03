@@ -10,12 +10,13 @@ type Props = {
     | "right"
     | "center"
     | "space-around"
-    | "space-between";
+    | "space-between"
+    | "none";
   children?: ReactElement | ReactElement[];
 };
 
 export default function Card({
-  backgroundColor = "white",
+  backgroundColor = "transparent",
   boxShadow = false,
   flexDir = "row",
   justifyContent = "center",
@@ -49,8 +50,10 @@ const CardContainer = styled.div<{
   width: 50%;
   height: 50%;
   box-shadow: ${(props) =>
-    props.boxShadow ? "rgba(100, 100, 111, 0.1) 0px 1px 20px 0px" : "none"};
-  background-color: "${(props) => props.backgroundColor}";
+    props.boxShadow
+      ? "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;"
+      : "none"};
+  background-color: ${(props) => props.backgroundColor};
 
   animation: fadeIn 1.5s;
   @keyframes fadeIn {

@@ -29,32 +29,32 @@ export default function Home(): ReactElement {
           <Button
             id="resumeButton"
             label={"Resumé"}
-            backgroundColor={lightTheme.quaternary.main}
+            backgroundColor={lightTheme.tertiary.main}
             textColor={lightTheme.quinary.light}
-            onHoverBackgroundColor={lightTheme.quaternary.dark}
+            onHoverBackgroundColor={lightTheme.tertiary.dark}
             onClick={() => {}}
           ></Button>
           <div className="icons">
             <Svg
               component={LinkedInIcon}
-              fill={lightTheme.quaternary.main}
-              onHoverFill={lightTheme.quaternary.dark}
+              fill={lightTheme.tertiary.main}
+              onHoverFill={lightTheme.tertiary.dark}
               onClick={function (): void {
                 throw new Error("Function not implemented.");
               }}
             />
             <Svg
               component={GitHubIcon}
-              fill={lightTheme.quaternary.main}
-              onHoverFill={lightTheme.quaternary.dark}
+              fill={lightTheme.tertiary.main}
+              onHoverFill={lightTheme.tertiary.dark}
               onClick={function (): void {
                 throw new Error("Function not implemented.");
               }}
             />
             <Svg
               component={EmailIcon}
-              fill={lightTheme.quaternary.main}
-              onHoverFill={lightTheme.quaternary.dark}
+              fill={lightTheme.tertiary.main}
+              onHoverFill={lightTheme.tertiary.dark}
               onClick={function (): void {
                 throw new Error("Function not implemented.");
               }}

@@ -1,90 +1,97 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import Title from "./shared/Title";
-import { PageContent } from "@/pages";
+import { CardTitle, CardContent } from "@/pages";
 import { lightTheme } from "@/themes";
 
 type Props = {
-  pageContent: PageContent;
-  onClick: (pageContent: PageContent) => void;
+  cardContent: CardContent;
+  onClick: (pageContent: CardContent, cardTitle: CardTitle) => void;
+  backgroundColor?: string;
 };
 
-export default function Navbar({ pageContent, onClick }: Props): ReactElement {
+export default function Navbar({
+  cardContent,
+  onClick,
+  backgroundColor = "transparent",
+}: Props): ReactElement {
   return (
-    <NavbarContainer>
+    <NavbarContainer backgroundColor={backgroundColor}>
       <div className={"logo-placeholder "}></div>
       <RightLinks>
         <Title
           text={"Home"}
           fontSize="15px"
           onClick={() => {
-            onClick(PageContent.Home);
+            onClick(CardContent.Home, CardTitle.Home);
           }}
-          underline={pageContent === PageContent.Home}
-          fontColor={lightTheme.quaternary.main}
-          underlineColor={lightTheme.quaternary.main}
-          hoverColor={lightTheme.quaternary.dark}
+          underline={cardContent === CardContent.Home}
+          fontColor={lightTheme.primary.main}
+          underlineColor={lightTheme.tertiary.main}
+          hoverColor={lightTheme.primary.dark}
         />
         <Title
           text={"About Me"}
           fontSize="15px"
           onClick={() => {
-            onClick(PageContent.AboutMe);
+            onClick(CardContent.AboutMe, CardTitle.AboutMe);
           }}
-          underline={pageContent === PageContent.AboutMe}
-          fontColor={lightTheme.quaternary.main}
-          underlineColor={lightTheme.quaternary.main}
-          hoverColor={lightTheme.quaternary.dark}
+          underline={cardContent === CardContent.AboutMe}
+          fontColor={lightTheme.primary.main}
+          underlineColor={lightTheme.tertiary.main}
+          hoverColor={lightTheme.primary.dark}
         />
         <Title
           text={"Skills"}
           fontSize="15px"
           onClick={() => {
-            onClick(PageContent.Skills);
+            onClick(CardContent.Skills, CardTitle.Skills);
           }}
-          underline={pageContent === PageContent.Skills}
-          fontColor={lightTheme.quaternary.main}
-          underlineColor={lightTheme.quaternary.main}
-          hoverColor={lightTheme.quaternary.dark}
+          underline={cardContent === CardContent.Skills}
+          fontColor={lightTheme.primary.main}
+          underlineColor={lightTheme.tertiary.main}
+          hoverColor={lightTheme.primary.dark}
         />
         <Title
           text={"Projects"}
           fontSize="15px"
           onClick={() => {
-            onClick(PageContent.Projects);
+            onClick(CardContent.Projects, CardTitle.Projects);
           }}
-          underline={pageContent === PageContent.Projects}
-          fontColor={lightTheme.quaternary.main}
-          underlineColor={lightTheme.quaternary.main}
-          hoverColor={lightTheme.quaternary.dark}
+          underline={cardContent === CardContent.Projects}
+          fontColor={lightTheme.primary.main}
+          underlineColor={lightTheme.tertiary.main}
+          hoverColor={lightTheme.primary.dark}
         />
         <Title
           text={"Contact Me"}
           fontSize="15px"
           onClick={() => {
-            onClick(PageContent.ContactMe);
+            onClick(CardContent.ContactMe, CardTitle.ContactMe);
           }}
-          underline={pageContent === PageContent.ContactMe}
-          fontColor={lightTheme.quaternary.main}
-          underlineColor={lightTheme.quaternary.main}
-          hoverColor={lightTheme.quaternary.dark}
+          underline={cardContent === CardContent.ContactMe}
+          fontColor={lightTheme.primary.main}
+          underlineColor={lightTheme.tertiary.main}
+          hoverColor={lightTheme.primary.dark}
         />
       </RightLinks>
     </NavbarContainer>
   );
 }
 
-const NavbarContainer = styled.div`
+const NavbarContainer = styled.div<{ backgroundColor: string }>`
   position: fixed;
   top: 0;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  background-color: white;
+  background-color: ${(props) => props.backgroundColor};
   height: 8%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
   & .logo-placeholder {
     background-color: rgb(125, 125, 125, 0.5);

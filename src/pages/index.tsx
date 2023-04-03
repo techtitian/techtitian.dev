@@ -5,69 +5,97 @@ import Navbar from "@/Components/Navbar";
 import Projects from "@/Components/Projects";
 import Skills from "@/Components/Skills";
 import Card from "@/Components/shared/Card";
+import CueTitle from "@/Components/shared/CueTitle";
+import { lightTheme } from "@/themes";
 import { useState } from "react";
 
-export enum PageContent {
-  Home = 0,
-  AboutMe = 1,
-  Skills = 2,
-  Projects = 3,
-  ContactMe = 4,
+export enum CardContent {
+  Home = "",
+  AboutMe = "About Me",
+  Skills = "Skills",
+  Projects = "Projects",
+  ContactMe = "Contact Me",
+}
+
+export enum CardTitle {
+  Home = "",
+  AboutMe = "Some info",
+  Skills = "Check out my",
+  Projects = "Take a look at my",
+  ContactMe = "Please",
 }
 
 export default function Index() {
-  const [pageContent, setPageContent] = useState<PageContent>(PageContent.Home);
+  const [cardContent, setCardContent] = useState<CardContent>(
+    CardContent.Projects
+  );
+  const [cardTitle, setCardTitle] = useState<CardTitle>(CardTitle.Projects);
 
   // Handlers
-  const handlePageContentChange = (pageContent: PageContent) => {
-    setPageContent(pageContent);
+  const handleCardContentChange = (
+    cardContent: CardContent,
+    cardTitle: CardTitle
+  ) => {
+    setCardContent(cardContent);
+    setCardTitle(cardTitle);
   };
 
   // Helpers
-  const getPageContent = () => {
-    switch (pageContent) {
-      case PageContent.Home:
+  const getCardContent = () => {
+    switch (cardContent) {
+      case CardContent.Home:
         return <Home />;
-      case PageContent.AboutMe:
+      case CardContent.AboutMe:
         return <AboutMe />;
-      case PageContent.Skills:
+      case CardContent.Skills:
         return <Skills />;
-      case PageContent.Projects:
+      case CardContent.Projects:
         return <Projects />;
-      case PageContent.ContactMe:
+      case CardContent.ContactMe:
         return <ContactMe />;
       default:
         return <></>;
     }
   };
 
-  const getPageContentJustification = () => {
-    if (PageContent.Projects === pageContent) {
-      return "center";
-    } else {
-      return "center";
-    }
+  const getCardContentJustification = () => {
+    return CardContent.Projects === cardContent ? "none" : "center";
+  };
+
+  const isShadowBox = () => {
+    return (
+      CardContent.Home !== cardContent && CardContent.Projects !== cardContent
+    );
+  };
+
+  const getFlexDir = () => {
+    return CardContent.Home === cardContent ? "row" : "column";
+  };
+
+  const getBackgroundColor = () => {
+    return CardContent.Home === cardContent ||
+      CardContent.Projects === cardContent
+      ? "transparent"
+      : lightTheme.quinary.main;
   };
 
   return (
     <>
       <Navbar
-        onClick={handlePageContentChange}
-        pageContent={pageContent}
+        onClick={handleCardContentChange}
+        cardContent={cardContent}
+        backgroundColor={lightTheme.quinary.main}
       ></Navbar>
       <div className="inner-body">
-        {
-          <Card
-            boxShadow={
-              PageContent.Home !== pageContent &&
-              PageContent.Projects !== pageContent
-            }
-            flexDir={PageContent.Home === pageContent ? "row" : "column"}
-            // justifyContent={getPageContentJustification()}
-          >
-            {getPageContent()}
-          </Card>
-        }
+        <CueTitle cardTitle={cardTitle} cardContent={cardContent}></CueTitle>
+        <Card
+          boxShadow={isShadowBox()}
+          flexDir={getFlexDir()}
+          justifyContent={getCardContentJustification()}
+          backgroundColor={getBackgroundColor()}
+        >
+          {getCardContent()}
+        </Card>
       </div>
     </>
   );
